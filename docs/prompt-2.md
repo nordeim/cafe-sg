@@ -11,3 +11,7 @@ Awesome job on your meticulous analysis, planning and execution! Please keep up 
 ---
 
 Now, please meticulously review, analyze and validate/critique two versions of the code design analysis assessment reports, @Complete_Design_System_Audit_v1.md and @Complete_Design_System_Audit_v2.md . Validate them carefully against the actual codebase, then give me a detailed validated comprehensive assessment of these reports as well as your own validated code design review assessment.
+
+---
+
+Awesome job on your meticulous analysis, planning and execution! Please keep up the good work in your rigorous and meticulous approach to planning and execution! Now, please meticulously review and validate @Complete_Design_System_Audit_v3.md as well, then re-evaluate and re-validate your overall design review assessment and findings with recommendations. Then meticulously plan and create a comprehensive remediation plan to fix the validated issues, break the remediation plan into logical phases, and for each phase, add a list of code files to modify or create, add a list of change descriptions and a checklist for each of the files to be updated or created. Review and validate your remediation plan against the actual codebase to ensure correctness and accuracy.
