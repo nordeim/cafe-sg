@@ -107,16 +107,12 @@ export default async function Home() {
               Since 2015, we&apos;ve been roasting single-origin beans using techniques passed down through generations, blending traditional Singaporean coffee culture with contemporary craft roasting methods.
             </p>
             <div className="flex flex-col md:flex-row gap-4 justify-center">
-              <Link href="#beans" passHref legacyBehavior>
-                <ButtonMerlion variant="primary" className="w-full md:w-auto">
-                  Discover Our Beans
-                </ButtonMerlion>
-              </Link>
-              <Link href="#tasting-room" passHref legacyBehavior>
-                <ButtonMerlion variant="secondary" className="w-full md:w-auto">
-                  Tasting Experience
-                </ButtonMerlion>
-              </Link>
+              <ButtonMerlion variant="primary" href="#beans" className="w-full md:w-auto">
+                Discover Our Beans
+              </ButtonMerlion>
+              <ButtonMerlion variant="secondary" href="#tasting-room" className="w-full md:w-auto">
+                Tasting Experience
+              </ButtonMerlion>
             </div>
           </div>
 
