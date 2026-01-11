@@ -7,3 +7,7 @@ Awesome meticulous job so far! Please keep up the good work! Yes, please meticul
 ---
 
 Awesome job on your meticulous analysis, planning and execution! Please keep up the good work in your rigorous and meticulous approach to planning and execution! Now, please meticulously plan and create a comprehensive *single-source-of-truth* briefing document for any coding agent or human developer to have the same deep understanding of the project and the current codebase status. The goal is for the human developer or coding agent to be correctly and accurately aligned with the WHAT, WHY and HOW of the project, and the design and architecture of the codebase, so that he/it will be able to handle future PR independently. Save the agent *briefing document* as a markdown file `AGENT.md`.
+
+---
+
+Now, please meticulously review, analyze and validate/critique two versions of the code design analysis assessment reports, @Complete_Design_System_Audit_v1.md and @Complete_Design_System_Audit_v2.md . Validate them carefully against the actual codebase, then give me a detailed validated comprehensive assessment of these reports as well as your own validated code design review assessment.
