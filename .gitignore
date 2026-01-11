@@ -1,0 +1,10 @@
+node_modules/
+.next/
+venv/
+.venv/
+backup/
+plan/
+tmp/
+bak.git/
+.env
+vendor/
