@@ -1,0 +1,5 @@
+AGENT.md
+GEMINI.md
+Master_Execution_Plan.md
+Project_Architecture_Document.md
+README.md
