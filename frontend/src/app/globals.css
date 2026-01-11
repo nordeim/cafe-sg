@@ -1,26 +1,169 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer tokens {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* ===== PERANAKAN HERITAGE COLOR SYSTEM ===== */
+    --color-nyonya-cream: #F8F3E6;
+    --color-nyonya-cream-rgb: 248, 243, 230;
+    
+    --color-kopi-brown: #3A2A1F;
+    --color-kopi-brown-rgb: 58, 42, 31;
+    
+    --color-terracotta: #C77966;
+    --color-terracotta-rgb: 199, 121, 102;
+    
+    --color-heritage-blue: #4A6B7D;
+    --color-heritage-blue-rgb: 74, 107, 125;
+    
+    --color-gold-leaf: #D4AF37;
+    --color-gold-leaf-rgb: 212, 175, 55;
+
+    /* ===== ACCESSIBILITY-SAFE VARIANTS ===== */
+    --color-ui-terracotta: #9A5E4A;
+    --color-ui-gold: #A68A2E;
+    --color-ui-blue: #3A5463;
+
+    /* ===== TYPOGRAPHY ===== */
+    --font-heading: var(--font-cormorant-garamond);
+    --font-body: var(--font-crimson-pro);
+    --font-decorative: var(--font-pinyon-script);
+
+    /* ===== FLUID TYPOGRAPHY SCALE (Major Third 1.25) ===== */
+    --text-xs: clamp(0.69rem, 0.66rem + 0.17vw, 0.79rem);
+    --text-sm: clamp(0.83rem, 0.79rem + 0.21vw, 0.96rem);
+    --text-base: clamp(1.00rem, 0.95rem + 0.26vw, 1.20rem);
+    --text-lg: clamp(1.20rem, 1.14rem + 0.31vw, 1.44rem);
+    --text-xl: clamp(1.44rem, 1.37rem + 0.37vw, 1.73rem);
+    --text-2xl: clamp(1.73rem, 1.64rem + 0.45vw, 2.07rem);
+    --text-3xl: clamp(2.07rem, 1.97rem + 0.54vw, 2.49rem);
+    --text-4xl: clamp(2.49rem, 2.37rem + 0.65vw, 3.20rem);
+    --text-5xl: clamp(3.00rem, 2.80rem + 0.80vw, 4.50rem);
+    --text-6xl: clamp(3.50rem, 3.20rem + 1.00vw, 5.50rem);
+
+    /* ===== SPACING ===== */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-24: 6rem;
+    --space-32: 8rem;
+
+    /* ===== ANIMATIONS ===== */
+    --duration-fast: 120ms;
+    --duration-medium: 250ms;
+    --duration-slow: 400ms;
+    --easing-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    
+    /* ===== SHADOWS ===== */
+    --shadow-sm: 0 2px 4px rgba(var(--color-kopi-brown-rgb), 0.08);
+    --shadow-lg: 0 8px 16px rgba(var(--color-kopi-brown-rgb), 0.15);
+  }
+
+  @media (prefers-contrast: more) {
+    :root {
+      --color-nyonya-cream: #FFFFFF;
+      --color-kopi-brown: #000000;
+      --color-ui-terracotta: #000000;
+      --color-ui-gold: #000000;
+      --color-ui-blue: #000000;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :root {
+      --duration-fast: 1ms;
+      --duration-medium: 1ms;
+      --duration-slow: 1ms;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@theme {
+  --color-nyonya-cream: var(--color-nyonya-cream);
+  --color-kopi-brown: var(--color-kopi-brown);
+  --color-terracotta: var(--color-terracotta);
+  --color-heritage-blue: var(--color-heritage-blue);
+  --color-gold-leaf: var(--color-gold-leaf);
+  
+  --color-ui-terracotta: var(--color-ui-terracotta);
+  --color-ui-gold: var(--color-ui-gold);
+  --color-ui-blue: var(--color-ui-blue);
+
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+  --font-decorative: var(--font-decorative);
+
+  --text-xs: var(--text-xs);
+  --text-sm: var(--text-sm);
+  --text-base: var(--text-base);
+  --text-lg: var(--text-lg);
+  --text-xl: var(--text-xl);
+  --text-2xl: var(--text-2xl);
+  --text-3xl: var(--text-3xl);
+  --text-4xl: var(--text-4xl);
+  --text-5xl: var(--text-5xl);
+  --text-6xl: var(--text-6xl);
+
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-fade-up: fadeUp var(--duration-slow) var(--easing-smooth) forwards;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-nyonya-cream);
+    color: var(--color-kopi-brown);
+    font-family: var(--font-body);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+  }
+}
+
+@layer components {
+  .folio-frame {
+    position: relative;
+    border: 1px solid rgba(var(--color-kopi-brown-rgb), 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all var(--duration-medium) var(--easing-smooth);
+  }
+  
+  .folio-frame::after {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba(var(--color-gold-leaf-rgb), 0.2);
+    border-radius: 6px;
+    pointer-events: none;
+  }
+  
+  .folio-frame:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-ui-terracotta);
+  }
+  
+  .folio-frame:hover::after {
+    border-color: var(--color-gold-leaf);
+  }
+}
+
+@layer overrides {
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+    50% { transform: translateY(-20px) rotate(15deg); opacity: 0.6; }
+  }
+
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
