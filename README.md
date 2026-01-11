@@ -1,7 +1,7 @@
 # Merlion Brews ☕️🇸🇬
 ### Artisan Coffee Crafted with Peranakan Soul & Enterprise Integrity
 
-![Status](https://img.shields.io/badge/Status-Phase_0%2F1_Foundation-d4af37?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Complete-brightgreen?style=for-the-badge)
 ![Frontend](https://img.shields.io/badge/Next.js_15-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
 ![Backend](https://img.shields.io/badge/Laravel_12-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
 ![Style](https://img.shields.io/badge/Tailwind_v4-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white)
@@ -32,6 +32,7 @@ We are building a bridge between **Heritage** (Aesthetic Fidelity) and **Scale**
 *   **GST Hardening**: 9% GST calculated and displayed explicitly on all line items.
 *   **PayNow Support**: Integrated via Stripe PaymentIntents for local seamless payment.
 *   **InvoiceNow**: MVP-scope integration via provider API for PEPPOL network compliance (April 1, 2026 mandate ready).
+*   **PDPA**: Explicit consent tracking for marketing communications.
 
 ---
 
@@ -54,6 +55,7 @@ graph TD
     Catalog[Catalog Service]
     Inventory[Inventory Service]
     Order[Order Service]
+    Admin[Admin API]
   end
   
   Cart -->|REST/Secure| Backend_Domain
@@ -133,6 +135,7 @@ merlion-brews/
 │   ├── components/merlion/ # Aesthetic Wrappers (The Soul)
 │   └── design-tokens/      # TypeScript Token Bridge
 ├── infra/                  # Docker Compose & Local Env
+│   └── production/         # Production Dockerfiles
 └── docs/                   # Architecture & Runbooks
     ├── ADR/                # Architecture Decision Records
     └── runbooks/           # Operational Guides
@@ -150,22 +153,24 @@ We follow a **Meticulous Approach** driven by the `Master_Execution_Plan.md` (ME
     *   No dropping InvoiceNow/PayNow requirements.
 3.  **Agent-Friendly**: The MEP is designed to be executed by AI coding agents with minimal supervision, provided the context is respected.
 
-**Current Phase**: `Phase 0: Critical Compliance & Credentials`
-
 ---
 
 ## 🗺 Roadmap
 
-- [ ] **Phase 0**: Credentials (InvoiceNow/Stripe) ✅ *In Progress*
-- [ ] **Phase 1**: Monorepo & Local Infra
-- [ ] **Phase 2**: Backend Skeleton & Domain Models
-- [ ] **Phase 3**: Design Token Bridge & CSS Layers
-- [ ] **Phase 4**: Merlion Component Wrappers
-- [ ] **Phase 5**: Storefront Pages
-- [ ] **Phase 6**: Cart & Inventory Reservation
-- [ ] **Phase 7**: Checkout (Stripe + PayNow)
-- [ ] **Phase 8**: Invoicing (GST + InvoiceNow)
-- [ ] **Phase 9**: Hardening & Observability
+- [x] **Phase 0**: Credentials (InvoiceNow/Stripe)
+- [x] **Phase 1**: Monorepo & Local Infra
+- [x] **Phase 2**: Backend Skeleton & Domain Models
+- [x] **Phase 3**: Design Token Bridge & CSS Layers
+- [x] **Phase 4**: Merlion Component Wrappers
+- [x] **Phase 5**: Storefront Pages
+- [x] **Phase 6**: Cart & Inventory Reservation
+- [x] **Phase 7**: Checkout (Stripe + PayNow)
+- [x] **Phase 8**: Invoicing (GST + InvoiceNow)
+- [x] **Phase 9**: Hardening & Observability
+- [x] **Phase 10**: Newsletter & Consent
+- [x] **Phase 11**: Events Booking
+- [x] **Phase 12**: Admin Dashboard
+- [x] **Phase 13**: CI/CD & Deployment
 
 ---
 

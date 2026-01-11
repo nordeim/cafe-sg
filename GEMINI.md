@@ -23,6 +23,7 @@ The system is architected as a **Backend-for-Frontend (BFF)** hybrid:
 
 **Infrastructure (`/infra`)**
 - Docker Compose for local development (Postgres + Redis).
+- Production Dockerfiles for CI/CD.
 
 ## Development Constraints (Scope Lock)
 
@@ -51,6 +52,15 @@ The project follows a strict **Master Execution Plan (MEP)** located at `Master_
 - **Phase 1**: Monorepo & Local Infra.
 - **Phase 2**: Backend Skeleton.
 - **Phase 3**: Design Token Bridge.
-...and so on.
+- **Phase 4**: Merlion Components.
+- **Phase 5**: Storefront Pages.
+- **Phase 6**: Cart & Reservations.
+- **Phase 7**: Checkout.
+- **Phase 8**: Invoicing.
+- **Phase 9**: Hardening.
+- **Phase 10**: Newsletter.
+- **Phase 11**: Events.
+- **Phase 12**: Admin.
+- **Phase 13**: CI/CD.
 
 **Agent Instructions**: Always check `Master_Execution_Plan.md` before starting a task to ensure alignment with the current phase and validation gates.
