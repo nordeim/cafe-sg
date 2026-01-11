@@ -1,3 +1,8 @@
+<img width="1475" height="964" alt="image" src="https://github.com/user-attachments/assets/acc2173b-c4c2-4f15-a534-57a6824b9871" />
+<img width="1161" height="970" alt="image" src="https://github.com/user-attachments/assets/5700f322-a8b5-4949-b588-04fc4009dec1" />
+<img width="1161" height="970" alt="image" src="https://github.com/user-attachments/assets/bf76407a-acda-4e3e-b310-f21d6406d5ea" />
+<img width="864" height="970" alt="image" src="https://github.com/user-attachments/assets/875d026b-9bd3-4f89-8fa1-578daada2f11" />
+
 # Merlion Brews ☕️🇸🇬
 ### Artisan Coffee Crafted with Peranakan Soul & Enterprise Integrity
 
