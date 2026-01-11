@@ -39,7 +39,29 @@ The repository is a monorepo:
 
 ---
 
-## 1. Phase 1 — Monorepo Foundation + Local Dev Infrastructure
+## 1. Phase 0 — Critical Compliance & Credentials (Week 0)
+
+### 1.1 Outcome
+Long-lead-time credentials for compliance (InvoiceNow, Stripe) are secured or the process is initiated.
+
+### 1.2 Files to create
+
+#### 1) `docs/runbooks/credentials-setup.md`
+- **Purpose**: Track status of 3rd party onboarding.
+- **Interfaces**:
+  - Links to provider portals (IRAS, Stripe, InvoiceNow vendor)
+- **Checklist**:
+  - [ ] InvoiceNow Provider selected and account created
+  - [ ] IRAS Sandbox access requested
+  - [ ] Stripe SG account created
+  - [ ] Stripe PayNow enabled in dashboard
+
+### 1.3 Phase validations
+- Provider credentials (client ID/secret) are available for `.env` usage in later phases.
+
+---
+
+## 2. Phase 1 — Monorepo Foundation + Local Dev Infrastructure
 
 ### 1.1 Outcome
 A developer can run the full stack locally (Next.js + Laravel + Postgres + Redis) with consistent configuration and a single “happy path” command sequence.
@@ -107,7 +129,7 @@ A developer can run the full stack locally (Next.js + Laravel + Postgres + Redis
 
 ---
 
-## 2. Phase 2 — Backend Skeleton (Laravel 12) + Core Domain Model
+## 3. Phase 2 — Backend Skeleton (Laravel 12) + Core Domain Model
 
 ### 2.1 Outcome
 Laravel API runs locally, connects to Postgres, supports migrations, and exposes a versioned health endpoint.
@@ -188,7 +210,7 @@ Create at least:
 
 ---
 
-## 3. Phase 3 — Design Token Bridge + CSS Layers (Frontend Foundation)
+## 4. Phase 3 — Design Token Bridge + CSS Layers (Frontend Foundation)
 
 ### 3.1 Outcome
 Next.js 15 app exists with Tailwind v4 configured in a way that preserves the `cafe.html` layer model and design tokens.
@@ -280,7 +302,7 @@ Next.js 15 app exists with Tailwind v4 configured in a way that preserves the `c
 
 ---
 
-## 4. Phase 4 — Merlion Component System (Shadcn Primitives + Wrappers)
+## 5. Phase 4 — Merlion Component System (Shadcn Primitives + Wrappers)
 
 ### 4.1 Outcome
 Reusable components replicate the “soul” of `cafe.html` without coupling the entire UI to raw HTML.
@@ -348,7 +370,7 @@ Reusable components replicate the “soul” of `cafe.html` without coupling the
 
 ---
 
-## 5. Phase 5 — Storefront Pages (Content + Catalog)
+## 6. Phase 5 — Storefront Pages (Content + Catalog)
 
 ### 5.1 Outcome
 Pages mirror the structure and voice of `cafe.html` while pulling product data from Laravel.
@@ -395,7 +417,7 @@ Pages mirror the structure and voice of `cafe.html` while pulling product data f
 
 ---
 
-## 6. Phase 6 — Cart + Inventory Reservation
+## 7. Phase 6 — Cart + Inventory Reservation
 
 ### 6.1 Outcome
 Add-to-cart creates/updates server-side reservations with TTL; oversell is prevented.
@@ -456,7 +478,7 @@ Add-to-cart creates/updates server-side reservations with TTL; oversell is preve
 
 ---
 
-## 7. Phase 7 — Checkout + Stripe PaymentIntents (PayNow required)
+## 8. Phase 7 — Checkout + Stripe PaymentIntents (PayNow required)
 
 ### 7.1 Outcome
 Checkout creates an order draft, initiates Stripe payment with PayNow enabled, and completes via webhook.
@@ -471,6 +493,7 @@ Checkout creates an order draft, initiates Stripe payment with PayNow enabled, a
 - **Checklist**:
   - Displays GST breakdown
   - Offers PayNow
+  - Handles 1-hour QR code expiration (refresh logic or timeout message)
 
 #### 2) `frontend/app/api/checkout/route.ts`
 - **Purpose**: BFF checkout orchestration.
@@ -529,7 +552,7 @@ Checkout creates an order draft, initiates Stripe payment with PayNow enabled, a
 
 ---
 
-## 8. Phase 8 — Invoicing + InvoiceNow Provider Integration (MVP)
+## 9. Phase 8 — Invoicing + InvoiceNow Provider Integration (MVP)
 
 ### 8.1 Outcome
 Invoices are generated per paid order and transmitted to InvoiceNow via provider API with audit logging and retries.
@@ -583,7 +606,7 @@ Invoices are generated per paid order and transmitted to InvoiceNow via provider
 
 ---
 
-## 9. Phase 9 — Observability, Security Hardening, and Quality Gates
+## 10. Phase 9 — Observability, Security Hardening, and Quality Gates
 
 ### 9.1 Outcome
 The system is production-ready enough to deploy with monitoring hooks and clear runbooks.
@@ -631,7 +654,7 @@ The system is production-ready enough to deploy with monitoring hooks and clear 
 
 ---
 
-## 10. Phase 10 — Newsletter, Consent, and Transactional Messaging
+## 11. Phase 10 — Newsletter, Consent, and Transactional Messaging
 
 ### 10.1 Outcome
 Newsletter signup is implemented end-to-end with explicit consent capture (PDPA-aligned), and the system can send transactional emails (order confirmation, invoice delivery) via a pluggable mail provider.
@@ -693,7 +716,7 @@ Newsletter signup is implemented end-to-end with explicit consent capture (PDPA-
 
 ---
 
-## 11. Phase 11 — Experiences & Events Booking (Tasting Room + Cultural Gatherings)
+## 12. Phase 11 — Experiences & Events Booking (Tasting Room + Cultural Gatherings)
 
 ### 11.1 Outcome
 Users can book experiences and reserve event spots (as implied by `cafe.html`), with capacity management and optional payment requirements.
@@ -750,7 +773,7 @@ Users can book experiences and reserve event spots (as implied by `cafe.html`), 
 
 ---
 
-## 12. Phase 12 — Admin Dashboard (Day‑1 Operations)
+## 13. Phase 12 — Admin Dashboard (Day‑1 Operations)
 
 ### 12.1 Outcome
 Admin users can manage products, inventory adjustments, orders, invoices, bookings, and operational states (webhook/invoice transmission statuses).
@@ -796,7 +819,7 @@ Admin users can manage products, inventory adjustments, orders, invoices, bookin
 
 ---
 
-## 13. Phase 13 — CI, Deployment, and Environment Promotion
+## 14. Phase 13 — CI, Deployment, and Environment Promotion
 
 ### 13.1 Outcome
 The repository can be built and tested automatically, and deployed to production-like environments with clear promotion steps.
@@ -826,7 +849,7 @@ The repository can be built and tested automatically, and deployed to production
 
 ---
 
-## 14. Global Interfaces Contract (must remain stable)
+## 15. Global Interfaces Contract (must remain stable)
 
 ### 14.1 Backend API (minimum contract)
 - `GET /api/v1/health`
@@ -858,7 +881,7 @@ The repository can be built and tested automatically, and deployed to production
 
 ---
 
-## 15. Final Review Checklist for This MEP (self-validation)
+## 16. Final Review Checklist for This MEP (self-validation)
 The AI coding agent (or reviewer) must confirm:
 - Every phase has:
   - Outcome
@@ -875,7 +898,7 @@ The AI coding agent (or reviewer) must confirm:
 
 ---
 
-## 16. Notes for Minimal-Supervision Execution
+## 17. Notes for Minimal-Supervision Execution
 - If a phase introduces new env vars, **update `.env.example` files** in that same phase.
 - If a response schema changes, create an ADR in `docs/adr/`.
 - Keep the UI “soul” safe by ensuring `globals.css` and wrapper components match `cafe.html` before adding more product features.

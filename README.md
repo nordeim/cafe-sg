@@ -1,0 +1,176 @@
+# Merlion Brews ☕️🇸🇬
+### Artisan Coffee Crafted with Peranakan Soul & Enterprise Integrity
+
+![Status](https://img.shields.io/badge/Status-Phase_0%2F1_Foundation-d4af37?style=for-the-badge)
+![Frontend](https://img.shields.io/badge/Next.js_15-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![Backend](https://img.shields.io/badge/Laravel_12-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+![Style](https://img.shields.io/badge/Tailwind_v4-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Database](https://img.shields.io/badge/Postgres_16-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+
+---
+
+## 📖 The Vision
+
+**Merlion Brews** is a Singapore-first, design-led headless commerce platform. It rejects the "template aesthetic" of modern e-commerce in favor of a bespoke **Peranakan Design System** defined in `cafe.html`, while enforcing rigorous enterprise standards for transactional integrity and local compliance.
+
+We are building a bridge between **Heritage** (Aesthetic Fidelity) and **Scale** (Commerce Integrity).
+
+## ✨ Key Features
+
+### 🎨 Design System ("The Soul")
+*   **Authoritative Source**: `cafe.html` dictates all tokens, layers, and behaviors.
+*   **Merlion Wrappers**: Custom components (e.g., `folio-frame`, `button-merlion`) wrapping Shadcn primitives to enforce the double-border gold-inset aesthetic.
+*   **Emotional Performance**: Micro-interactions (floating beans, scroll reveals) treated as first-class citizens alongside Core Web Vitals.
+*   **Tailwind v4**: Utilizing native CSS cascade layers (`@layer tokens, base...`) and CSS-first configuration.
+
+### 💼 Commerce Engine ("The Brain")
+*   **Next.js 15 BFF**: A Backend-for-Frontend layer handling UX orchestration and edge caching.
+*   **Laravel 12 Domain API**: System-of-record for products, orders, and inventory.
+*   **Two-Phase Inventory**: Reservation (TTL-based) → Commitment (Payment-confirmed) with ledger auditing to prevent overselling.
+
+### 🇸🇬 Singapore Compliance ("The Law")
+*   **GST Hardening**: 9% GST calculated and displayed explicitly on all line items.
+*   **PayNow Support**: Integrated via Stripe PaymentIntents for local seamless payment.
+*   **InvoiceNow**: MVP-scope integration via provider API for PEPPOL network compliance (April 1, 2026 mandate ready).
+
+---
+
+## 🏗 Architecture
+
+Merlion Brews follows a **Hybrid BFF** topology:
+
+```mermaid
+graph TD
+  User[User Browser] -->|HTTPS| Edge[Vercel Edge Network]
+  
+  subgraph Frontend_BFF [Next.js 15 / Frontend]
+    Page[Server Components]
+    Cart[Edge Functions]
+  end
+  
+  Edge --> Frontend_BFF
+  
+  subgraph Backend_Domain [Laravel 12 / Backend]
+    Catalog[Catalog Service]
+    Inventory[Inventory Service]
+    Order[Order Service]
+  end
+  
+  Cart -->|REST/Secure| Backend_Domain
+  
+  subgraph Data_Layer
+    PG[(PostgreSQL 16)]
+    Redis[(Redis 7)]
+  end
+  
+  Backend_Domain --> PG
+  Backend_Domain --> Redis
+  
+  subgraph External
+    Stripe[Stripe Payments]
+    IRAS[InvoiceNow Provider]
+  end
+  
+  Cart -->|Client Secret| Stripe
+  Backend_Domain -->|Invoice XML| IRAS
+```
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+*   **Docker Desktop** (for Postgres/Redis)
+*   **Node.js LTS** (v20+)
+*   **PHP 8.3+** & **Composer**
+
+### Installation
+
+1.  **Clone the Monorepo**
+    ```bash
+    git clone https://github.com/your-org/merlion-brews.git
+    cd merlion-brews
+    ```
+
+2.  **Start Infrastructure**
+    ```bash
+    cd infra
+    cp .env.example .env
+    docker compose up -d
+    ```
+
+3.  **Setup Backend (Laravel)**
+    ```bash
+    cd ../backend
+    cp .env.example .env
+    composer install
+    php artisan key:generate
+    php artisan migrate --seed
+    php artisan serve
+    ```
+
+4.  **Setup Frontend (Next.js)**
+    ```bash
+    cd ../frontend
+    cp .env.example .env.local
+    npm install
+    npm run dev
+    ```
+
+Visit the storefront at `http://localhost:3000` and the API at `http://localhost:8000`.
+
+---
+
+## 📂 Project Structure
+
+```
+merlion-brews/
+├── backend/                # Laravel 12 Domain API
+│   ├── app/Services/       # Inventory, Gst, InvoiceNow logic
+│   └── routes/api.php      # Versioned API endpoints
+├── frontend/               # Next.js 15 Storefront
+│   ├── app/                # App Router (Server Components)
+│   ├── components/merlion/ # Aesthetic Wrappers (The Soul)
+│   └── design-tokens/      # TypeScript Token Bridge
+├── infra/                  # Docker Compose & Local Env
+└── docs/                   # Architecture & Runbooks
+    ├── ADR/                # Architecture Decision Records
+    └── runbooks/           # Operational Guides
+```
+
+---
+
+## 🛠 Development Workflow
+
+We follow a **Meticulous Approach** driven by the `Master_Execution_Plan.md` (MEP).
+
+1.  **Phase-Gated Execution**: We do not proceed to a new phase until all validation gates of the current phase are met.
+2.  **Scope Lock**: 
+    *   No drifting from `cafe.html` aesthetic.
+    *   No dropping InvoiceNow/PayNow requirements.
+3.  **Agent-Friendly**: The MEP is designed to be executed by AI coding agents with minimal supervision, provided the context is respected.
+
+**Current Phase**: `Phase 0: Critical Compliance & Credentials`
+
+---
+
+## 🗺 Roadmap
+
+- [ ] **Phase 0**: Credentials (InvoiceNow/Stripe) ✅ *In Progress*
+- [ ] **Phase 1**: Monorepo & Local Infra
+- [ ] **Phase 2**: Backend Skeleton & Domain Models
+- [ ] **Phase 3**: Design Token Bridge & CSS Layers
+- [ ] **Phase 4**: Merlion Component Wrappers
+- [ ] **Phase 5**: Storefront Pages
+- [ ] **Phase 6**: Cart & Inventory Reservation
+- [ ] **Phase 7**: Checkout (Stripe + PayNow)
+- [ ] **Phase 8**: Invoicing (GST + InvoiceNow)
+- [ ] **Phase 9**: Hardening & Observability
+
+---
+
+## 📄 License
+
+This project is proprietary.
+*   **Business Registration**: 2015123456K
+*   **GST Registration**: M9-1234567-8
