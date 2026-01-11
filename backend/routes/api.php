@@ -7,6 +7,7 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\StripeWebhookController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\BookingController;
 
 Route::prefix('v1')->group(function () {
     Route::get('/health', [HealthController::class, 'check']);
@@ -23,4 +24,7 @@ Route::prefix('v1')->group(function () {
     Route::post('/webhooks/stripe', [StripeWebhookController::class, 'handle']);
 
     Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe']);
+
+    Route::get('/events', [BookingController::class, 'index']);
+    Route::post('/bookings', [BookingController::class, 'store']);
 });
