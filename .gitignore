@@ -1,10 +1,38 @@
+# General
+.DS_Store
+Thumbs.db
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Node / Frontend
 node_modules/
+npm-debug.log
+yarn-error.log
 .next/
-venv/
-.venv/
+coverage/
+
+# PHP / Backend
+vendor/
+storage/logs/
+storage/framework/views/
+storage/framework/cache/
+storage/framework/sessions/
+storage/framework/testing/
+bootstrap/cache/
+.phpunit.result.cache
+
+# Misc
+tmp/
 backup/
 plan/
-tmp/
 bak.git/
-.env
-vendor/
+venv/
+.venv/
