@@ -8,6 +8,8 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\StripeWebhookController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Http\Controllers\Admin\InventoryController as AdminInventoryController;
 
 Route::prefix('v1')->group(function () {
     Route::get('/health', [HealthController::class, 'check']);
@@ -27,4 +29,11 @@ Route::prefix('v1')->group(function () {
 
     Route::get('/events', [BookingController::class, 'index']);
     Route::post('/bookings', [BookingController::class, 'store']);
+
+    // Admin Routes
+    Route::middleware(['auth:sanctum', 'admin'])->prefix('admin')->group(function () {
+        Route::get('/orders', [AdminOrderController::class, 'index']);
+        Route::get('/orders/{id}', [AdminOrderController::class, 'show']);
+        Route::patch('/inventory/{sku}', [AdminInventoryController::class, 'update']);
+    });
 });
