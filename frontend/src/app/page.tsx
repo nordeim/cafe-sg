@@ -4,6 +4,7 @@ import { Ornament } from "@/components/merlion/ornament";
 import { TextureOverlay } from "@/components/merlion/texture-overlay";
 import { ZigzagItem, ZigzagSection } from "@/components/merlion/zigzag";
 import { MobileNavMerlion } from "@/components/merlion/mobile-nav";
+import { NewsletterForm } from "@/components/merlion/newsletter-form";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -316,6 +317,18 @@ export default async function Home() {
                           </div>
 
                         </section>
+
+        {/* Newsletter */}
+        <section id="newsletter" className="py-24 px-4 bg-nyonya-cream">
+          <div className="max-w-[65ch] mx-auto text-center">
+            <h2 className="text-4xl font-600 text-ui-terracotta mb-4">Join Our Manuscript</h2>
+            <div className="font-decorative text-xl text-ui-blue mb-8">Receive Exclusive Insights</div>
+            <p className="mb-8">
+              Subscribe to receive quarterly manuscript pages featuring bean discoveries, roasting techniques, and invitations to our private tasting salons.
+            </p>
+            <NewsletterForm />
+          </div>
+        </section>
       </main>
 
       {/* Footer */}
