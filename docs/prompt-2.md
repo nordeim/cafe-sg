@@ -4,8 +4,6 @@ Please meticulously review, analyze and validate/critique the plan @plan_to_fina
 
 Awesome meticulous job so far! Please keep up the good work! Yes, please meticulously plan to create a detailed comprehensive implementation plan to create/update all the code files for Phase 1 in @MASTER_EXECUTION_PLAN.md , break the implementation plan into logical sub-phases, and for each sub-phase, include a list of files to create or update, and include a description of the purpose and features for each file to be created or updated as well as a checklist for it. Review and validate your implementation plan for Phase 1 against the current codebase to align and continue what had been completed. 
 
-$ find frontend/ backend/ -type f
-frontend/package.json
-backend/composer.json
-backend/package.json
+---
 
+Awesome job on your meticulous analysis, planning and execution! Please keep up the good work in your rigorous and meticulous approach to planning and execution! Now, please meticulously plan and create a comprehensive *single-source-of-truth* briefing document for any coding agent or human developer to have the same deep understanding of the project and the current codebase status. The goal is for the human developer or coding agent to be correctly and accurately aligned with the WHAT, WHY and HOW of the project, and the design and architecture of the codebase, so that he/it will be able to handle future PR independently. Save the agent *briefing document* as a markdown file `AGENT.md`.
