@@ -36,3 +36,4 @@ plan/
 bak.git/
 venv/
 .venv/
+.venv
