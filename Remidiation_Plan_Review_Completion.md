@@ -131,3 +131,49 @@ npm run test
 - **Next required action (you)**: Install Playwright browsers with `npx playwright install`.
 # Completion summary
 - **All TODO items are completed** and the remediation plan phases (1–5) have been executed with small, targeted changes aimed at [cafe.html](cci:7://file:///h:/project/cafe-sg/cafe.html:0:0-0:0) parity + accessibility + security hardening.
+
+---
+
+I’ll inspect [5704fcf9cc956f20.css](cci:7://file:///h:/project/cafe-sg/5704fcf9cc956f20.css:0:0-0:0) directly and pull out the exact lines that prove the circular token definitions (e.g. `text-xs: var(--text-xs)`), then map them to what Tailwind is doing and why it breaks the page’s computed styles.
+
+
+## Findings from [5704fcf9cc956f20.css](cci:7://file:///h:/project/cafe-sg/5704fcf9cc956f20.css:0:0-0:0) (the built stylesheet)
+
+### 1) The built CSS **contains circular/self-referential tokens**
+In the snippet we can see (inside `@layer theme{:root,:host{...}}`):
+
+- `--text-xs:var(--text-xs);`
+- `--text-sm:var(--text-sm);`
+- `--text-base:var(--text-base);`
+- `--text-lg:var(--text-lg);`
+
+This is exactly the pathological pattern that can make the computed value of those variables **invalid** (effectively collapsing token-driven font sizing/spacing and breaking the page’s look).
+
+### 2) This behavior does **not** exist in [cafe.html](cci:7://file:///h:/project/cafe-sg/cafe.html:0:0-0:0)
+In [cafe.html](cci:7://file:///h:/project/cafe-sg/cafe.html:0:0-0:0), tokens are defined as real values (e.g. `--text-xs: clamp(...)`) under `@layer tokens`, and are *consumed* elsewhere—never redefined as `var(--same-token)`.
+
+## Root cause
+Your Tailwind v4 theme layer is emitting `--text-*` variables that reference themselves. That happens when we feed Tailwind a token mapping like:
+
+```css
+@theme {
+  --text-xs: var(--text-xs);
+  ...
+}
+```
+
+That mapping is circular by definition.
+
+## Fix status (already applied)
+I already patched **[frontend/src/app/globals.css](cci:7://file:///h:/project/cafe-sg/frontend/src/app/globals.css:0:0-0:0)** to remove the circular `@theme` mappings and replace them with **concrete values** (matching [cafe.html](cci:7://file:///h:/project/cafe-sg/cafe.html:0:0-0:0)). That’s the correct minimal fix.
+
+## What to do next (verification)
+1. Run a fresh build so the CSS is regenerated:
+   - `npm run build`
+2. Re-open the newly generated CSS chunk and confirm the theme layer no longer has:
+   - `--text-xs:var(--text-xs)` (and similar)
+3. Re-test the landing page in the browser.
+
+## Status
+- **Completed**: Inspected the provided [5704fcf9cc956f20.css](cci:7://file:///h:/project/cafe-sg/5704fcf9cc956f20.css:0:0-0:0) and extracted the exact evidence of the circular token definitions.
+- **Next**: Rebuild to regenerate CSS with the fixed [globals.css](cci:7://file:///h:/project/cafe-sg/frontend/src/app/globals.css:0:0-0:0), then re-check the output and UI.
