@@ -12,14 +12,14 @@ The system is architected as a **Backend-for-Frontend (BFF)** hybrid:
 **Frontend (`/frontend`)**
 - **Framework**: Next.js 15 (App Router)
 - **Styling**: Tailwind CSS v4 (CSS-first config via `@theme`)
-- **Components**: Shadcn UI primitives wrapped in custom `Merlion` components (e.g., `folio-frame`, `button-merlion`) to enforce the design system.
+- **Components**: Shadcn UI primitives wrapped in custom `Merlion` components (e.g., `folio-frame`, `button-merlion`) to enforce the design system. Includes parity components like `DropCap`, `PeranakanDivider`, and `ScrollIndicator`.
 - **Design Source**: `cafe.html` is the authoritative source for tokens, CSS layers, and interaction behaviors.
 
 **Backend (`/backend`)**
 - **Framework**: Laravel 12 (PHP 8.3+)
 - **Database**: PostgreSQL 16
 - **Cache/Queue**: Redis 7
-- **Key Services**: Inventory (Two-Phase Reservation), Orders (GST Logic), Invoicing (InvoiceNow via Provider API).
+- **Key Services**: Inventory (Two-Phase Reservation), Orders (GST Logic), Invoicing (InvoiceNow via Provider API), Newsletter (PDPA Consent).
 
 **Infrastructure (`/infra`)**
 - Docker Compose for local development (Postgres + Redis).
