@@ -107,7 +107,7 @@ export default async function Home() {
               Singapore&apos;s Heritage in Every Cup
             </div>
             <p className="text-xl text-kopi-brown mb-12 max-w-[60ch] mx-auto">
-              Since 2015, we&apos;ve been roasting single-origin beans using techniques passed down through generations, blending traditional Singaporean coffee culture with contemporary craft roasting methods.
+              Since 2015, we've been roasting single-origin beans using techniques passed down through generations, blending traditional Singaporean coffee culture with contemporary craft roasting methods.
             </p>
             <div className="flex flex-col md:flex-row gap-4 justify-center">
               <ButtonMerlion variant="primary" href="#beans" className="w-full md:w-auto">
@@ -127,227 +127,125 @@ export default async function Home() {
           <div className="absolute top-1/4 left-[15%] w-3 h-3 rounded-full bg-kopi-brown/30 animate-float" style={{ animationDelay: '0s' }} />
           <div className="absolute top-[40%] left-[85%] w-3 h-3 rounded-full bg-kopi-brown/30 animate-float" style={{ animationDelay: '0.5s' }} />
           <div className="absolute top-[60%] left-[25%] w-3 h-3 rounded-full bg-kopi-brown/30 animate-float" style={{ animationDelay: '1s' }} />
-
+          
           <ScrollIndicator />
         </section>
 
-                        {/* Collections */}
+        {/* Collections */}
+        <ZigzagSection id="beans" className="py-24 px-4 max-w-[85ch] mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-600 text-ui-terracotta mb-4">Heritage Bean Collection</h2>
+            <div className="font-decorative text-xl text-ui-blue">Single-Origin Mastery</div>
+          </div>
 
-                        <ZigzagSection id="beans" className="py-24 px-4 max-w-[85ch] mx-auto">
+          {products?.map((product: Product) => (
+            <ZigzagItem
+              key={product.slug}
+              image={
+                <Image 
+                  src={productImages[product.slug] || productImages['singapore-heritage-blend']}
+                  alt={product.name}
+                  width={400}
+                  height={400}
+                  className="w-full h-full object-cover"
+                />
+              }
+              details={
+                <>
+                  <h3 className="text-3xl font-600 text-ui-terracotta mb-4">{product.name}</h3>
+                  <p className="mb-4">{product.description}</p>
+                  <div className="font-decorative text-2xl text-ui-gold mb-6">
+                    <span className="sr-only">Price: </span>
+                    {formatPrice(product.price_cents)}
+                  </div>
+                  <ButtonMerlion 
+                    variant="secondary" 
+                    aria-label={`Add ${product.name} to cart`}
+                  >
+                    Add to Cart
+                  </ButtonMerlion>
+                </>
+              }
+            />
+          ))}
+        </ZigzagSection>
 
-                          <div className="text-center mb-12">
+        <PeranakanDivider />
 
-                            <h2 className="text-4xl font-600 text-ui-terracotta mb-4">Heritage Bean Collection</h2>
+        {/* Story */}
+        <section id="story" className="py-24 px-4 bg-nyonya-cream">
+          <div className="max-w-[85ch] mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-600 text-ui-terracotta mb-4">Our Manuscript</h2>
+              <div className="font-decorative text-xl text-ui-blue">A Heritage of Craft</div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              <div className="folio-frame aspect-[3/2]">
+                <Image 
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%23F8F3E6'/%3E%3Ccircle cx='150' cy='200' r='80' fill='%234A6B7D' opacity='0.2'/%3E%3Ccircle cx='450' cy='200' r='60' fill='%23C77966' opacity='0.2'/%3E%3Cpath d='M100,300 Q200,200 300,300 T500,300' stroke='%239A5E4A' stroke-width='3' fill='none'/%3E%3Ctext x='300' y='200' font-family='Arial' font-size='24' text-anchor='middle' fill='%233A2A1F' opacity='0.3'%3EMaster Roaster%3C/text%3E%3C/svg%3E"
+                  alt="Master Roaster"
+                  width={600}
+                  height={400}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div>
+                <DropCap>
+                  n 2015, after a decade studying coffee roasting techniques across Southeast Asia and Europe, I returned to Singapore with a singular vision: to create coffee that honors both our multicultural heritage and the meticulous craftsmanship of traditional roasting methods.
+                </DropCap>
+                <p className="text-lg">
+                  Our roastery in Tiong Bahru operates on principles drawn from Singapore&apos;s kopitiams and European roasting traditions. Every cast-iron drum roaster is hand-maintained, every batch roasted by ear and smell.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
 
-                            <div className="font-decorative text-xl text-ui-blue">Single-Origin Mastery</div>
+        <PeranakanDivider />
 
-                          </div>
-
-                          <PeranakanDivider />
-
-                          <DropCap className="mb-12 mx-auto">
-                            In the tradition of Singapore&apos;s kopi masters, we source only the finest beans from sustainable growers across Southeast Asia and beyond. Each variety is roasted in small batches using cast-iron drum roasters, with profiles developed through years of experimentation and respect for the bean&apos;s natural characteristics.
-                          </DropCap>
-
+        {/* Tasting Room */}
+        <section id="tasting-room" className="py-24 px-4">
+          <div className="max-w-[85ch] mx-auto text-center">
+             <h2 className="text-4xl font-600 text-ui-terracotta mb-4">Tasting Room</h2>
+             <div className="font-decorative text-xl text-ui-blue mb-12">Experience Our Craft</div>
+             
+             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <CardMerlion className="p-8 text-left">
+                  <h3 className="text-2xl font-600 text-kopi-brown mb-2">Heritage Cupping</h3>
+                  <p className="mb-4 text-sm">An immersive journey through three generations of Singaporean coffee culture.</p>
+                  <div className="font-decorative text-xl text-ui-gold mb-4">
+                    <span className="sr-only">Price: </span>$45.00 per person
+                  </div>
+                  <ButtonMerlion variant="secondary" className="w-full">Book Experience</ButtonMerlion>
+                </CardMerlion>
                 
-
-                          {products?.map((product: Product) => (
-
-                            <ZigzagItem
-
-                              key={product.slug}
-
-                              image={
-
-                                <Image 
-
-                                  src={productImages[product.slug] || productImages['singapore-heritage-blend']} 
-
-                                  alt={product.name}
-
-                                  width={400}
-
-                                  height={400}
-
-                                  className="w-full h-full object-cover"
-
-                                />
-
-                              }
-
-                              details={
-
-                                <>
-
-                                  <h3 className="text-3xl font-600 text-ui-terracotta mb-4">{product.name}</h3>
-
-                                  <p className="mb-4">{product.description}</p>
-
-                                  <div className="font-decorative text-2xl text-ui-gold mb-6" role="text">
-                                    <span className="sr-only">Price: </span>
-                                    {formatPrice(product.price_cents)}
-                                  </div>
-
-                                  <ButtonMerlion
-                                    variant="secondary"
-                                    aria-label={`Add ${product.name} to cart`}
-                                  >
-                                    Add to Cart
-                                  </ButtonMerlion>
-
-                                </>
-
-                              }
-
-                            />
-
-                          ))}
-
-                        </ZigzagSection>
-
-                
-
-                        {/* Story */}
-
-                        <section id="story" className="py-24 px-4 bg-nyonya-cream">
-
-                          <div className="max-w-[85ch] mx-auto">
-
-                            <div className="text-center mb-12">
-
-                              <h2 className="text-4xl font-600 text-ui-terracotta mb-4">Our Manuscript</h2>
-
-                              <div className="font-decorative text-xl text-ui-blue">A Heritage of Craft</div>
-
-                            </div>
-
-                            <PeranakanDivider />
-
-                            
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-
-                              <div className="folio-frame aspect-[3/2]">
-
-                                <Image 
-
-                                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%23F8F3E6'/%3E%3Ccircle cx='150' cy='200' r='80' fill='%234A6B7D' opacity='0.2'/%3E%3Ccircle cx='450' cy='200' r='60' fill='%23C77966' opacity='0.2'/%3E%3Cpath d='M100,300 Q200,200 300,300 T500,300' stroke='%239A5E4A' stroke-width='3' fill='none'/%3E%3Ctext x='300' y='200' font-family='Arial' font-size='24' text-anchor='middle' fill='%233A2A1F' opacity='0.3'%3EMaster Roaster%3C/text%3E%3C/svg%3E"
-
-                                  alt="Master Roaster"
-
-                                  width={600}
-
-                                  height={400}
-
-                                  className="w-full h-full object-cover"
-
-                                />
-
-                              </div>
-
-                              <div>
-
-                                <DropCap className="mb-4 text-lg">
-                                  In 2015, after a decade studying coffee roasting techniques across Southeast Asia and Europe, I returned to Singapore with a singular vision: to create coffee that honors both our multicultural heritage and the meticulous craftsmanship of traditional roasting methods.
-                                </DropCap>
-
-                                <p className="text-lg">
-
-                                  Our roastery in Tiong Bahru operates on principles drawn from Singapore&apos;s kopitiams and European roasting traditions. Every cast-iron drum roaster is hand-maintained, every batch roasted by ear and smell.
-
-                                </p>
-
-                              </div>
-
-                            </div>
-
-                          </div>
-
-                        </section>
-
-                
-
-                        {/* Tasting Room */}
-
-                        <section id="tasting-room" className="py-24 px-4">
-
-                          <div className="max-w-[85ch] mx-auto text-center">
-
-                             <h2 className="text-4xl font-600 text-ui-terracotta mb-4">Tasting Room</h2>
-
-                             <div className="font-decorative text-xl text-ui-blue mb-12">Experience Our Craft</div>
-
-                             <PeranakanDivider />
-
-                             <DropCap className="mx-auto text-left mb-12">
-                               Step into our Tiong Bahru tasting room, where the aroma of freshly roasted beans mingles with the scent of heritage Peranakan tiles. This is where we host intimate cupping sessions, brewing workshops, and private tastings—each experience designed to deepen your appreciation for the art and science of coffee.
-                             </DropCap>
-
-                             
-
-                             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-
-                                <CardMerlion className="p-8 text-left">
-
-                                  <h3 className="text-2xl font-600 text-kopi-brown mb-2">Heritage Cupping</h3>
-
-                                  <p className="mb-4 text-sm">An immersive journey through three generations of Singaporean coffee culture.</p>
-
-                                  <div className="font-decorative text-xl text-ui-gold mb-4" role="text">
-                                    <span className="sr-only">Price: </span>
-                                    $45.00 per person
-                                  </div>
-
-                                  <ButtonMerlion variant="secondary" className="w-full">Book Experience</ButtonMerlion>
-
-                                </CardMerlion>
-
-                                
-
-                                <CardMerlion className="p-8 text-left">
-
-                                  <h3 className="text-2xl font-600 text-kopi-brown mb-2">Brewing Masterclass</h3>
-
-                                  <p className="mb-4 text-sm">Learn the techniques behind perfect pour-over, French press, and traditional sock brewing.</p>
-
-                                  <div className="font-decorative text-xl text-ui-gold mb-4" role="text">
-                                    <span className="sr-only">Price: </span>
-                                    $65.00 per person
-                                  </div>
-
-                                  <ButtonMerlion variant="secondary" className="w-full">Book Class</ButtonMerlion>
-
-                                </CardMerlion>
-
-                
-
-                                <CardMerlion className="p-8 text-left">
-
-                                  <h3 className="text-2xl font-600 text-kopi-brown mb-2">Private Room</h3>
-
-                                  <p className="mb-4 text-sm">Host your next gathering in our intimate tasting room. Perfect for team building.</p>
-
-                                  <div className="font-decorative text-xl text-ui-gold mb-4" role="text">
-                                    <span className="sr-only">Price: </span>
-                                    $350.00 / 8 guests
-                                  </div>
-
-                                  <ButtonMerlion variant="secondary" className="w-full">Reserve Room</ButtonMerlion>
-
-                                </CardMerlion>
-
-                             </div>
-
-                          </div>
-
-                        </section>
+                <CardMerlion className="p-8 text-left">
+                  <h3 className="text-2xl font-600 text-kopi-brown mb-2">Brewing Masterclass</h3>
+                  <p className="mb-4 text-sm">Learn the techniques behind perfect pour-over, French press, and traditional sock brewing.</p>
+                  <div className="font-decorative text-xl text-ui-gold mb-4">
+                    <span className="sr-only">Price: </span>$65.00 per person
+                  </div>
+                  <ButtonMerlion variant="secondary" className="w-full">Book Class</ButtonMerlion>
+                </CardMerlion>
+
+                <CardMerlion className="p-8 text-left">
+                  <h3 className="text-2xl font-600 text-kopi-brown mb-2">Private Room</h3>
+                  <p className="mb-4 text-sm">Host your next gathering in our intimate tasting room. Perfect for team building.</p>
+                  <div className="font-decorative text-xl text-ui-gold mb-4">
+                    <span className="sr-only">Price: </span>$350.00 / 8 guests
+                  </div>
+                  <ButtonMerlion variant="secondary" className="w-full">Reserve Room</ButtonMerlion>
+                </CardMerlion>
+             </div>
+          </div>
+        </section>
 
         {/* Newsletter */}
         <section id="newsletter" className="py-24 px-4 bg-nyonya-cream">
           <div className="max-w-[65ch] mx-auto text-center">
             <h2 className="text-4xl font-600 text-ui-terracotta mb-4">Join Our Manuscript</h2>
             <div className="font-decorative text-xl text-ui-blue mb-8">Receive Exclusive Insights</div>
-            <PeranakanDivider />
             <p className="mb-8">
               Subscribe to receive quarterly manuscript pages featuring bean discoveries, roasting techniques, and invitations to our private tasting salons.
             </p>

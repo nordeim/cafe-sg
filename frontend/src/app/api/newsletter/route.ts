@@ -1,99 +1,105 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
-type RateLimitEntry = {
-  count: number
-  resetAt: number
-}
+// Simple in-memory rate limiter for demo/MVP purposes
+// In production, use Redis (e.g., via upstash/ratelimit)
+const rateLimit = new Map<string, number[]>();
+const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
+const MAX_REQUESTS = 5; // 5 requests per minute
 
-const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000
-const RATE_LIMIT_MAX = 5
-
-function getRateLimitStore(): Map<string, RateLimitEntry> {
-  const g = globalThis as unknown as { __newsletterRateLimit?: Map<string, RateLimitEntry> }
-  if (!g.__newsletterRateLimit) g.__newsletterRateLimit = new Map()
-  return g.__newsletterRateLimit
-}
-
-function getClientKey(request: NextRequest): string {
-  const forwardedFor = request.headers.get("x-forwarded-for")
-  const ip = forwardedFor?.split(",")[0]?.trim() || "unknown"
-  const ua = request.headers.get("user-agent") || "unknown"
-  return `${ip}:${ua}`
-}
-
-function isValidEmail(email: string): boolean {
-  if (email.length < 3 || email.length > 254) return false
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-}
-
-export async function POST(request: NextRequest) {
-  const contentType = request.headers.get("content-type") || ""
-  if (!contentType.toLowerCase().includes("application/json")) {
-    return NextResponse.json({ error: "Unsupported content type" }, { status: 415 })
+export async function POST(request: Request) {
+  // 1. Content-Type Guard
+  const contentType = request.headers.get("content-type");
+  if (!contentType || !contentType.includes("application/json")) {
+    return new NextResponse("Unsupported Media Type", { status: 415 });
   }
 
-  const key = getClientKey(request)
-  const store = getRateLimitStore()
-  const now = Date.now()
-  const current = store.get(key)
-
-  if (!current || current.resetAt <= now) {
-    store.set(key, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS })
-  } else {
-    current.count += 1
-    store.set(key, current)
-    if (current.count > RATE_LIMIT_MAX) {
-      const retryAfterSeconds = Math.max(1, Math.ceil((current.resetAt - now) / 1000))
-      return NextResponse.json(
-        { error: "Too many requests" },
-        { status: 429, headers: { "Retry-After": String(retryAfterSeconds) } }
-      )
-    }
+  // 2. Rate Limiting (IP-based)
+  const ip = request.headers.get("x-forwarded-for") || "unknown";
+  const now = Date.now();
+  const windowStart = now - RATE_LIMIT_WINDOW;
+  
+  // Cleanup old entries
+  // (In a real app, this would be handled by the store expiration)
+  
+  const requestTimestamps = rateLimit.get(ip) || [];
+  const recentRequests = requestTimestamps.filter(t => t > windowStart);
+  
+  if (recentRequests.length >= MAX_REQUESTS) {
+    return new NextResponse("Too Many Requests", { 
+      status: 429,
+      headers: { 'Retry-After': '60' }
+    });
   }
-
-  const baseUrl =
-    process.env.API_BASE_URL || process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000"
-
-  const body = await request.json().catch(() => null)
-  if (!body || typeof body !== "object") {
-    return NextResponse.json({ error: "Invalid request body" }, { status: 400 })
-  }
-
-  const email = typeof (body as any).email === "string" ? (body as any).email.trim() : ""
-  const consentMarketing = (body as any).consent_marketing === true
-
-  if (!isValidEmail(email)) {
-    return NextResponse.json({ error: "Invalid email" }, { status: 400 })
-  }
-
-  if (!consentMarketing) {
-    return NextResponse.json({ error: "Consent required" }, { status: 400 })
-  }
-
-  const controller = new AbortController()
-  const timeout = setTimeout(() => controller.abort(), 8_000)
+  
+  rateLimit.set(ip, [...recentRequests, now]);
 
   try {
-    const res = await fetch(`${baseUrl}/api/v1/newsletter/subscribe`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      cache: "no-store",
-      body: JSON.stringify({ email, consent_marketing: true }),
-      signal: controller.signal,
-    })
+    const body = await request.json();
+    const { email, consent_marketing } = body;
 
-    if (!res.ok) {
-      return NextResponse.json({ error: "Subscription failed" }, { status: 502 })
+    // 3. Input Validation
+    if (!email || typeof email !== "string" || !email.includes("@")) {
+      return NextResponse.json(
+        { error: "Invalid email address" },
+        { status: 400 }
+      );
     }
 
-    const data = await res.json().catch(() => ({}))
-    return NextResponse.json(data)
-  } catch {
-    return NextResponse.json({ error: "Subscription failed" }, { status: 502 })
-  } finally {
-    clearTimeout(timeout)
+    if (consent_marketing !== true) {
+      return NextResponse.json(
+        { error: "Consent is required" },
+        { status: 400 }
+      );
+    }
+
+    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000';
+    
+    // 4. Timeouts & Fetch
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5s timeout
+
+    try {
+      const res = await fetch(`${baseUrl}/api/v1/newsletter/subscribe`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        // 5. Payload Whitelisting (Don't just forward `body`)
+        body: JSON.stringify({ 
+          email, 
+          consent_marketing 
+        }),
+        signal: controller.signal
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!res.ok) {
+        // Log the error internally but don't leak upstream details to client
+        console.error(`Newsletter API Error: ${res.status}`);
+        return NextResponse.json(
+          { error: "Subscription failed" }, 
+          { status: res.status === 422 ? 422 : 502 }
+        );
+      }
+
+      const data = await res.json();
+      return NextResponse.json(data);
+
+    } catch (fetchError: any) {
+      clearTimeout(timeoutId);
+      if (fetchError.name === 'AbortError') {
+        return NextResponse.json({ error: "Service timeout" }, { status: 504 });
+      }
+      throw fetchError;
+    }
+
+  } catch (error) {
+    console.error("Newsletter Proxy Error:", error);
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }

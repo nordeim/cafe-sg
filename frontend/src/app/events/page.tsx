@@ -79,7 +79,7 @@ export default function EventsPage() {
                   <div>
                     <h2 className="text-3xl font-600 text-kopi-brown mb-2">{event.title}</h2>
                     <p className="text-kopi-brown/80 mb-4">{event.description}</p>
-                    <div className="text-ui-gold font-decorative text-2xl" role="text">
+                    <div className="text-ui-gold font-decorative text-2xl">
                       <span className="sr-only">Price: </span>
                       {event.price_cents === 0 ? "Free" : `$${(event.price_cents / 100).toFixed(2)}`}
                     </div>
@@ -102,12 +102,8 @@ export default function EventsPage() {
                             variant="secondary" 
                             size="sm"
                             disabled={session.booked_count >= session.capacity}
-                            aria-label={
-                              session.booked_count >= session.capacity
-                                ? `${event.title} session is full`
-                                : `Book ${event.title} on ${new Date(session.starts_at).toLocaleDateString()} at ${new Date(session.starts_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`
-                            }
                             onClick={() => handleBook(session.id)}
+                            aria-label={`Book session on ${new Date(session.starts_at).toLocaleDateString()}`}
                           >
                             {session.booked_count >= session.capacity ? "Full" : "Book"}
                           </ButtonMerlion>

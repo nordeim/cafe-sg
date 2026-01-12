@@ -18,9 +18,9 @@ export function CartDrawer() {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <button
+        <button 
           className="relative p-2 text-kopi-brown hover:text-ui-terracotta transition-colors"
-          aria-label="Open cart"
+          aria-label={`Cart with ${items.length} items`}
         >
           <ShoppingBag className="w-6 h-6" />
           {items.length > 0 && (
@@ -49,15 +49,15 @@ export function CartDrawer() {
                 </div>
                 <div className="flex-1">
                   <h4 className="font-600 text-kopi-brown">{item.name}</h4>
-                  <div className="text-ui-gold font-decorative text-lg" role="text">
+                  <div className="text-ui-gold font-decorative text-lg">
                     <span className="sr-only">Price: </span>
-                    {/* Inline formatting if utils not ready */}
                     {`$${(item.price / 100).toFixed(2)}`}
                   </div>
                   <div className="flex items-center gap-2 mt-2">
                     <button 
                       onClick={() => updateQuantity(item.sku, Math.max(0, item.quantity - 1))}
                       className="p-1 hover:bg-black/5 rounded"
+                      aria-label={`Decrease quantity of ${item.name}`}
                     >
                       <Minus className="w-4 h-4" />
                     </button>
@@ -65,12 +65,14 @@ export function CartDrawer() {
                     <button 
                       onClick={() => updateQuantity(item.sku, item.quantity + 1)}
                       className="p-1 hover:bg-black/5 rounded"
+                      aria-label={`Increase quantity of ${item.name}`}
                     >
                       <Plus className="w-4 h-4" />
                     </button>
                     <button 
                       onClick={() => removeItem(item.sku)}
                       className="ml-auto text-red-500 hover:text-red-700 p-1"
+                      aria-label={`Remove ${item.name} from cart`}
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -85,7 +87,7 @@ export function CartDrawer() {
           <div className="flex justify-between items-end">
             <span className="font-600 text-kopi-brown">Total</span>
             <div className="text-right">
-              <span className="block font-decorative text-3xl text-ui-terracotta" role="text">
+              <span className="block font-decorative text-3xl text-ui-terracotta">
                 <span className="sr-only">Total price: </span>
                 {`$${(totalCents / 100).toFixed(2)}`}
               </span>

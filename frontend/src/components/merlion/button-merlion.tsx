@@ -12,10 +12,10 @@ const ButtonMerlion = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
   ({ className, variant = "primary", children, href, disabled, ...props }, ref) => {
     const classes = cn(
       buttonVariants({ variant: "default" }), // Start with base button styles
-      "relative min-h-[3.5rem] px-8 font-body text-lg font-600 border-2 transition-all duration-medium ease-smooth overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none",
-      variant === "primary" && "bg-ui-terracotta text-nyonya-cream border-transparent hover:text-nyonya-cream hover:bg-ui-terracotta", // Override Shadcn hover
-      variant === "secondary" && "bg-transparent border-ui-terracotta text-ui-terracotta hover:text-nyonya-cream hover:bg-transparent",
-      disabled && "opacity-50 cursor-not-allowed pointer-events-none",
+      "relative min-h-[3.5rem] px-8 font-body text-lg font-600 border-2 transition-all duration-medium ease-smooth overflow-hidden group",
+      variant === "primary" && "bg-ui-terracotta text-nyonya-cream border-transparent hover:text-nyonya-cream hover:bg-ui-terracotta focus-visible:ring-ui-terracotta", // Override Shadcn hover
+      variant === "secondary" && "bg-transparent border-ui-terracotta text-ui-terracotta hover:text-nyonya-cream hover:bg-transparent focus-visible:ring-ui-terracotta",
+      (disabled || (props as any)['aria-disabled']) && "opacity-50 pointer-events-none",
       className
     )
 
@@ -24,7 +24,7 @@ const ButtonMerlion = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
         {/* Hover Underlay Span */}
         <span 
           className={cn(
-            "absolute inset-0 -z-10 transform scale-x-0 origin-right transition-transform duration-medium ease-smooth group-hover:scale-x-100 group-hover:origin-left group-focus:scale-x-100 group-focus:origin-left",
+            "absolute inset-0 -z-10 transform scale-x-0 origin-right transition-transform duration-medium ease-smooth group-hover:scale-x-100 group-hover:origin-left group-focus-visible:scale-x-100 group-focus-visible:origin-left",
             variant === "primary" ? "bg-terracotta" : "bg-ui-terracotta"
           )}
         />
@@ -32,24 +32,22 @@ const ButtonMerlion = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
       </>
     )
 
-    if (href && disabled) {
-      return (
-        <span
-          className={classes}
-          aria-disabled="true"
-        >
-          {content}
-        </span>
-      )
-    }
-
     if (href) {
+      if (disabled) {
+        return (
+          <span 
+            className={classes} 
+            aria-disabled="true"
+            role="link"
+          >
+            {content}
+          </span>
+        )
+      }
       return (
         <Link 
           href={href} 
           className={classes}
-          aria-disabled={disabled ? "true" : undefined}
-          tabIndex={disabled ? -1 : undefined}
           // @ts-ignore - Link ref typing is tricky with forwardRef union, safe to ignore for internal usage
           ref={ref as any}
         >
@@ -62,7 +60,7 @@ const ButtonMerlion = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
       <Button
         ref={ref as React.Ref<HTMLButtonElement>}
         className={cn(
-          "relative min-h-[3.5rem] px-8 font-body text-lg font-600 border-2 transition-all duration-medium ease-smooth overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none",
+          "relative min-h-[3.5rem] px-8 font-body text-lg font-600 border-2 transition-all duration-medium ease-smooth overflow-hidden group",
           variant === "primary" && "bg-ui-terracotta text-nyonya-cream border-transparent hover:text-nyonya-cream hover:bg-ui-terracotta",
           variant === "secondary" && "bg-transparent border-ui-terracotta text-ui-terracotta hover:text-nyonya-cream hover:bg-transparent",
           className
