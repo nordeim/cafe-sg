@@ -1,7 +1,7 @@
-<img width="1475" height="964" alt="image" src="https://github.com/user-attachments/assets/acc2173b-c4c2-4f15-a534-57a6824b9871" />
-<img width="1161" height="970" alt="image" src="https://github.com/user-attachments/assets/5700f322-a8b5-4949-b588-04fc4009dec1" />
-<img width="1161" height="970" alt="image" src="https://github.com/user-attachments/assets/bf76407a-acda-4e3e-b310-f21d6406d5ea" />
-<img width="864" height="970" alt="image" src="https://github.com/user-attachments/assets/875d026b-9bd3-4f89-8fa1-578daada2f11" />
+<img width="988" height="938" alt="image" src="https://github.com/user-attachments/assets/9213100f-2440-4a4b-80ca-f4f070e7add1" />
+<img width="921" height="995" alt="image" src="https://github.com/user-attachments/assets/a5dd5dc8-a13f-49ff-9c0a-1a2f2e55ae0b" />
+<img width="889" height="993" alt="image" src="https://github.com/user-attachments/assets/ad23d215-99e9-423a-9fe9-c486b7785dfd" />
+<img width="839" height="999" alt="image" src="https://github.com/user-attachments/assets/d147e7a4-0ff6-4380-8893-196d89b7bc35" />
 
 # Merlion Brews ☕️🇸🇬
 ### Artisan Coffee Crafted with Peranakan Soul & Enterprise Integrity
