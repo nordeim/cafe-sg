@@ -109,21 +109,22 @@ graph TD
   Edge --> Frontend_BFF
   
   subgraph Backend_Domain [Laravel 12 API]
+    BackendAPI[Laravel 12 API]
     Catalog[Catalog Service]
     Inventory[Inventory Service]
     Order[Order Service]
     Invoice[InvoiceNow Service]
   end
   
-  Cart -->|REST/Secure| Backend_Domain
+  Cart -->|REST/Secure| BackendAPI
   
   subgraph Data_Layer
     PG[(PostgreSQL 16)]
     Redis[(Redis 7)]
   end
   
-  Backend_Domain --> PG
-  Backend_Domain --> Redis
+  BackendAPI --> PG
+  BackendAPI --> Redis
   
   subgraph External
     Stripe[Stripe Payments]
@@ -131,8 +132,8 @@ graph TD
   end
   
   Cart -->|Client Secret| Stripe
-  Stripe -->|Webhook (Signed)| Backend_Domain
-  Backend_Domain -->|Invoice XML| IRAS
+  Stripe -->|Webhook Signed| BackendAPI
+  BackendAPI -->|Invoice XML| IRAS
 ```
 
 ### 5.2 Responsibilities
