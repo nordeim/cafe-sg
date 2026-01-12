@@ -1,3 +1,19 @@
+ frontend/src/app/api/newsletter/route.ts              | 102 +++++++++++++++++++++++++++++------
+ frontend/src/app/events/page.tsx                      |   8 ++-
+ frontend/src/app/globals.css                          | 177 ++++++++++++++++++++++++++++++++++++++++++++++++++++---------
+ frontend/src/app/page.tsx                             |  61 +++++++++++++++------
+ frontend/src/components/merlion/button-merlion.tsx    |  21 ++++++--
+ frontend/src/components/merlion/cart-drawer.tsx       |  11 ++--
+ frontend/src/components/merlion/drop-cap.tsx          |  10 ++++
+ frontend/src/components/merlion/mobile-nav.tsx        |  70 +++++++++++++++++-------
+ frontend/src/components/merlion/newsletter-form.tsx   |  54 ++++++++++++++++---
+ frontend/src/components/merlion/peranakan-divider.tsx |  10 ++++
+ frontend/src/components/merlion/scroll-indicator.tsx  |  19 +++++++
+ frontend/src/components/merlion/texture-overlay.tsx   |   2 +-
+ frontend/src/design-tokens/index.ts                   |  41 ++++++++++++++
+
+
+
 $ git status
 On branch main
 Your branch is up to date with 'origin/main'.
@@ -28,3 +44,42 @@ Untracked files:
         frontend/src/components/merlion/drop-cap.tsx
         frontend/src/components/merlion/peranakan-divider.tsx
         frontend/src/components/merlion/scroll-indicator.tsx
+
+---
+
+$ git pull
+remote: Enumerating objects: 72, done.
+remote: Counting objects: 100% (72/72), done.
+remote: Compressing objects: 100% (26/26), done.
+remote: Total 44 (delta 22), reused 31 (delta 14), pack-reused 0 (from 0)
+Unpacking objects: 100% (44/44), 40.33 KiB | 133.00 KiB/s, done.
+From github.com:nordeim/cafe-sg
+   52f866d..63e632c  main       -> origin/main
+Updating 52f866d..63e632c
+Fast-forward
+ Remidiation_Plan_Review_Completion.md                 | 179 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ changes.txt                                           |  30 +++++++++++
+ docs/prompt-2.md                                      |   4 ++
+ frontend/package-lock.json                            |  14 +++++
+ frontend/package.json                                 |   2 +
+ frontend/playwright.config.ts                         |   6 ++-
+ frontend/src/app/api/newsletter/route.ts              | 102 +++++++++++++++++++++++++++++------
+ frontend/src/app/events/page.tsx                      |   8 ++-
+ frontend/src/app/globals.css                          | 177 ++++++++++++++++++++++++++++++++++++++++++++++++++++---------
+ frontend/src/app/page.tsx                             |  61 +++++++++++++++------
+ frontend/src/components/merlion/button-merlion.tsx    |  21 ++++++--
+ frontend/src/components/merlion/cart-drawer.tsx       |  11 ++--
+ frontend/src/components/merlion/drop-cap.tsx          |  10 ++++
+ frontend/src/components/merlion/mobile-nav.tsx        |  70 +++++++++++++++++-------
+ frontend/src/components/merlion/newsletter-form.tsx   |  54 ++++++++++++++++---
+ frontend/src/components/merlion/peranakan-divider.tsx |  10 ++++
+ frontend/src/components/merlion/scroll-indicator.tsx  |  19 +++++++
+ frontend/src/components/merlion/texture-overlay.tsx   |   2 +-
+ frontend/src/design-tokens/index.ts                   |  41 ++++++++++++++
+ frontend/tests/visual/hero.png                        | Bin 106786 -> 39816 bytes
+ 20 files changed, 729 insertions(+), 92 deletions(-)
+ create mode 100644 Remidiation_Plan_Review_Completion.md
+ create mode 100644 changes.txt
+ create mode 100644 frontend/src/components/merlion/drop-cap.tsx
+ create mode 100644 frontend/src/components/merlion/peranakan-divider.tsx
+ create mode 100644 frontend/src/components/merlion/scroll-indicator.tsx
