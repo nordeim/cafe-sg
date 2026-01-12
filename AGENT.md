@@ -30,6 +30,7 @@ The frontend is the guardian of the design system.
     *   `Button` -> `ButtonMerlion` (Hover underlay animation).
     *   `Card` -> `CardMerlion` (`folio-frame` double-border effect).
     *   `Sheet` -> `MobileNavMerlion` (Accessible menu).
+    *   **Parity Components**: `DropCap`, `PeranakanDivider`, `ScrollIndicator` (Aesthetic fidelity).
 
 ### 2.3 The "Brain" (Backend Architecture)
 The backend is the system of record.
@@ -129,12 +130,14 @@ npm run dev
 
 ---
 
-## 6. Rules of Engagement (Directives)
+6.  **Rules of Engagement (Directives)**
 
 1.  **Respect the Layer**: When styling, use `@layer components` for complex composite components. Do not pollute the global namespace.
 2.  **No Magic Numbers**: Use variables from `design-tokens` (e.g., `text-nyonya-cream`, `font-heading`).
 3.  **Strict Compliance**: Do not modify GST calculation logic (`9/109` rule) without verifying IRAS guidelines.
 4.  **Database Integrity**: Always use Transactions (`DB::transaction`) when modifying Inventory or Order status.
 5.  **Browser Support**: Tailwind v4 features (cascade layers) require modern browsers. Do not polyfill for IE11.
+6.  **Button Links**: Do not wrap `ButtonMerlion` in `Link`. Pass the `href` prop directly to `ButtonMerlion` to ensure valid HTML and correct accessibility semantics.
+7.  **Reduced Motion**: Infinite animations (floating beans, scroll indicators) must be disabled via `@media (prefers-reduced-motion: reduce)` in `globals.css`.
 
 **This document is the Single Source of Truth for the project's architectural intent.**

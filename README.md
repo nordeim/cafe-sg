@@ -25,7 +25,9 @@ We are building a bridge between **Heritage** (Aesthetic Fidelity) and **Scale**
 ### 🎨 Design System ("The Soul")
 *   **Authoritative Source**: `cafe.html` dictates all tokens, layers, and behaviors.
 *   **Merlion Wrappers**: Custom components (e.g., `folio-frame`, `button-merlion`) wrapping Shadcn primitives to enforce the double-border gold-inset aesthetic.
+*   **Parity Components**: Bespoke implementations of `DropCap`, `PeranakanDivider`, and `ScrollIndicator` to match the original design fidelity.
 *   **Emotional Performance**: Micro-interactions (floating beans, scroll reveals) treated as first-class citizens alongside Core Web Vitals.
+*   **Accessibility First**: WCAG AAA contrast compliance, reduced motion support (disabling infinite animations), and screen-reader optimized context.
 *   **Tailwind v4**: Utilizing native CSS cascade layers (`@layer tokens, base...`) and CSS-first configuration.
 
 ### 💼 Commerce Engine ("The Brain")

@@ -1,0 +1,50 @@
+$ rm -rf .next/
+pete@pop-os:/home/project/cafe-sg/frontend
+$ npm run build
+
+> frontend@0.1.0 build
+> next build
+
+▲ Next.js 16.1.1 (Turbopack)
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 7.5s
+✓ Finished TypeScript in 4.5s    
+✓ Collecting page data using 3 workers in 568.7ms    
+Backend not reachable during build, using empty data
+✓ Generating static pages using 3 workers (12/12) in 330.9ms
+✓ Finalizing page optimization in 5.7s    
+
+Route (app)            Revalidate  Expire
+┌ ○ /                          1m      1y
+├ ○ /_not-found
+├ ○ /admin/inventory
+├ ○ /admin/orders
+├ ƒ /api/bookings
+├ ƒ /api/catalog
+├ ƒ /api/checkout
+├ ƒ /api/newsletter
+├ ƒ /api/reservations
+├ ○ /checkout
+└ ○ /events
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+pete@pop-os:/home/project/cafe-sg/frontend
+$ npm run dev
+
+> frontend@0.1.0 dev
+> next dev
+
+▲ Next.js 16.1.1 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.2.132:3000
+
+✓ Starting...
+✓ Ready in 4.3s
+○ Compiling / ...
+Backend not reachable during build, using empty data
+ GET / 200 in 4.9s (compile: 4.3s, render: 612ms)
+
