@@ -5,6 +5,9 @@ import { TextureOverlay } from "@/components/merlion/texture-overlay";
 import { ZigzagItem, ZigzagSection } from "@/components/merlion/zigzag";
 import { MobileNavMerlion } from "@/components/merlion/mobile-nav";
 import { NewsletterForm } from "@/components/merlion/newsletter-form";
+import { DropCap } from "@/components/merlion/drop-cap";
+import { PeranakanDivider } from "@/components/merlion/peranakan-divider";
+import { ScrollIndicator } from "@/components/merlion/scroll-indicator";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -89,14 +92,14 @@ export default async function Home() {
             ))}
           </nav>
 
-          {/* <MobileNavMerlion links={navLinks} /> */}
+          <MobileNavMerlion links={navLinks} />
         </div>
       </header>
 
       <main id="main-content">
         {/* Hero */}
         <section className="min-h-screen flex flex-col justify-center items-center text-center px-4 relative overflow-hidden pt-32 pb-24">
-          <div className="max-w-[75ch] z-10 animate-fade-up opacity-0" style={{ animationFillMode: 'forwards' }}>
+          <div className="max-w-[75ch] z-10 animate-fade-up opacity-0">
             <h1 className="text-6xl tracking-tight mb-6 text-ui-terracotta leading-tight">
               Artisan Coffee Crafted with Peranakan Soul
             </h1>
@@ -124,6 +127,8 @@ export default async function Home() {
           <div className="absolute top-1/4 left-[15%] w-3 h-3 rounded-full bg-kopi-brown/30 animate-float" style={{ animationDelay: '0s' }} />
           <div className="absolute top-[40%] left-[85%] w-3 h-3 rounded-full bg-kopi-brown/30 animate-float" style={{ animationDelay: '0.5s' }} />
           <div className="absolute top-[60%] left-[25%] w-3 h-3 rounded-full bg-kopi-brown/30 animate-float" style={{ animationDelay: '1s' }} />
+
+          <ScrollIndicator />
         </section>
 
                         {/* Collections */}
@@ -137,6 +142,12 @@ export default async function Home() {
                             <div className="font-decorative text-xl text-ui-blue">Single-Origin Mastery</div>
 
                           </div>
+
+                          <PeranakanDivider />
+
+                          <DropCap className="mb-12 mx-auto">
+                            In the tradition of Singapore&apos;s kopi masters, we source only the finest beans from sustainable growers across Southeast Asia and beyond. Each variety is roasted in small batches using cast-iron drum roasters, with profiles developed through years of experimentation and respect for the bean&apos;s natural characteristics.
+                          </DropCap>
 
                 
 
@@ -172,13 +183,17 @@ export default async function Home() {
 
                                   <p className="mb-4">{product.description}</p>
 
-                                  <div className="font-decorative text-2xl text-ui-gold mb-6">
-
+                                  <div className="font-decorative text-2xl text-ui-gold mb-6" role="text">
+                                    <span className="sr-only">Price: </span>
                                     {formatPrice(product.price_cents)}
-
                                   </div>
 
-                                  <ButtonMerlion variant="secondary">Add to Cart</ButtonMerlion>
+                                  <ButtonMerlion
+                                    variant="secondary"
+                                    aria-label={`Add ${product.name} to cart`}
+                                  >
+                                    Add to Cart
+                                  </ButtonMerlion>
 
                                 </>
 
@@ -206,6 +221,8 @@ export default async function Home() {
 
                             </div>
 
+                            <PeranakanDivider />
+
                             
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -230,13 +247,9 @@ export default async function Home() {
 
                               <div>
 
-                                <p className="mb-4 text-lg">
-
-                                  <span className="float-left font-decorative text-6xl leading-[0.8] text-terracotta mr-3 mt-1">I</span>
-
-                                  n 2015, after a decade studying coffee roasting techniques across Southeast Asia and Europe, I returned to Singapore with a singular vision: to create coffee that honors both our multicultural heritage and the meticulous craftsmanship of traditional roasting methods.
-
-                                </p>
+                                <DropCap className="mb-4 text-lg">
+                                  In 2015, after a decade studying coffee roasting techniques across Southeast Asia and Europe, I returned to Singapore with a singular vision: to create coffee that honors both our multicultural heritage and the meticulous craftsmanship of traditional roasting methods.
+                                </DropCap>
 
                                 <p className="text-lg">
 
@@ -264,6 +277,12 @@ export default async function Home() {
 
                              <div className="font-decorative text-xl text-ui-blue mb-12">Experience Our Craft</div>
 
+                             <PeranakanDivider />
+
+                             <DropCap className="mx-auto text-left mb-12">
+                               Step into our Tiong Bahru tasting room, where the aroma of freshly roasted beans mingles with the scent of heritage Peranakan tiles. This is where we host intimate cupping sessions, brewing workshops, and private tastings—each experience designed to deepen your appreciation for the art and science of coffee.
+                             </DropCap>
+
                              
 
                              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -274,7 +293,10 @@ export default async function Home() {
 
                                   <p className="mb-4 text-sm">An immersive journey through three generations of Singaporean coffee culture.</p>
 
-                                  <div className="font-decorative text-xl text-ui-gold mb-4">$45.00 per person</div>
+                                  <div className="font-decorative text-xl text-ui-gold mb-4" role="text">
+                                    <span className="sr-only">Price: </span>
+                                    $45.00 per person
+                                  </div>
 
                                   <ButtonMerlion variant="secondary" className="w-full">Book Experience</ButtonMerlion>
 
@@ -288,7 +310,10 @@ export default async function Home() {
 
                                   <p className="mb-4 text-sm">Learn the techniques behind perfect pour-over, French press, and traditional sock brewing.</p>
 
-                                  <div className="font-decorative text-xl text-ui-gold mb-4">$65.00 per person</div>
+                                  <div className="font-decorative text-xl text-ui-gold mb-4" role="text">
+                                    <span className="sr-only">Price: </span>
+                                    $65.00 per person
+                                  </div>
 
                                   <ButtonMerlion variant="secondary" className="w-full">Book Class</ButtonMerlion>
 
@@ -302,7 +327,10 @@ export default async function Home() {
 
                                   <p className="mb-4 text-sm">Host your next gathering in our intimate tasting room. Perfect for team building.</p>
 
-                                  <div className="font-decorative text-xl text-ui-gold mb-4">$350.00 / 8 guests</div>
+                                  <div className="font-decorative text-xl text-ui-gold mb-4" role="text">
+                                    <span className="sr-only">Price: </span>
+                                    $350.00 / 8 guests
+                                  </div>
 
                                   <ButtonMerlion variant="secondary" className="w-full">Reserve Room</ButtonMerlion>
 
@@ -319,6 +347,7 @@ export default async function Home() {
           <div className="max-w-[65ch] mx-auto text-center">
             <h2 className="text-4xl font-600 text-ui-terracotta mb-4">Join Our Manuscript</h2>
             <div className="font-decorative text-xl text-ui-blue mb-8">Receive Exclusive Insights</div>
+            <PeranakanDivider />
             <p className="mb-8">
               Subscribe to receive quarterly manuscript pages featuring bean discoveries, roasting techniques, and invitations to our private tasting salons.
             </p>

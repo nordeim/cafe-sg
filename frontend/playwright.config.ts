@@ -72,8 +72,12 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'npm run start',
+    command: 'npm run build && npm run start:standalone',
     url: 'http://localhost:3000',
+    env: {
+      PORT: '3000',
+      HOSTNAME: '127.0.0.1',
+    },
     reuseExistingServer: !process.env.CI,
   },
 });

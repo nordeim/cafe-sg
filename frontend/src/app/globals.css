@@ -40,6 +40,14 @@
     --text-5xl: clamp(3.00rem, 2.80rem + 0.80vw, 4.50rem);
     --text-6xl: clamp(3.50rem, 3.20rem + 1.00vw, 5.50rem);
 
+    --leading-tight: 1.2;
+    --leading-normal: 1.6;
+    --leading-loose: 1.8;
+
+    --tracking-tight: -0.02em;
+    --tracking-normal: 0;
+    --tracking-loose: 0.1em;
+
     /* ===== SPACING ===== */
     --space-1: 0.25rem;
     --space-2: 0.5rem;
@@ -52,15 +60,37 @@
     --space-24: 6rem;
     --space-32: 8rem;
 
+    --space-inside: var(--space-4);
+    --space-outside: var(--space-8);
+    --space-stack: var(--space-6);
+    --space-inline: var(--space-3);
+
+    --container-width: min(100%, 85ch);
+    --nav-height: clamp(4rem, 3.5rem + 1.5vw, 5rem);
+    --border-radius: 8px;
+    --border-radius-sm: 4px;
+    --border-radius-lg: 16px;
+
     /* ===== ANIMATIONS ===== */
     --duration-fast: 120ms;
     --duration-medium: 250ms;
     --duration-slow: 400ms;
     --easing-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
     
     /* ===== SHADOWS ===== */
     --shadow-sm: 0 2px 4px rgba(var(--color-kopi-brown-rgb), 0.08);
+    --shadow-md: 0 4px 8px rgba(var(--color-kopi-brown-rgb), 0.12);
     --shadow-lg: 0 8px 16px rgba(var(--color-kopi-brown-rgb), 0.15);
+    --shadow-xl: 0 12px 24px rgba(var(--color-kopi-brown-rgb), 0.18);
+
+    --z-below: -1;
+    --z-base: 0;
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-modal: 300;
+    --z-popover: 400;
+    --z-toast: 500;
   }
 
   @media (prefers-contrast: more) {
@@ -83,30 +113,30 @@
 }
 
 @theme {
-  --color-nyonya-cream: var(--color-nyonya-cream);
-  --color-kopi-brown: var(--color-kopi-brown);
-  --color-terracotta: var(--color-terracotta);
-  --color-heritage-blue: var(--color-heritage-blue);
-  --color-gold-leaf: var(--color-gold-leaf);
+  --color-nyonya-cream: #F8F3E6;
+  --color-kopi-brown: #3A2A1F;
+  --color-terracotta: #C77966;
+  --color-heritage-blue: #4A6B7D;
+  --color-gold-leaf: #D4AF37;
   
-  --color-ui-terracotta: var(--color-ui-terracotta);
-  --color-ui-gold: var(--color-ui-gold);
-  --color-ui-blue: var(--color-ui-blue);
+  --color-ui-terracotta: #9A5E4A;
+  --color-ui-gold: #A68A2E;
+  --color-ui-blue: #3A5463;
 
-  --font-heading: var(--font-heading);
-  --font-body: var(--font-body);
-  --font-decorative: var(--font-decorative);
+  --font-heading: var(--font-cormorant-garamond);
+  --font-body: var(--font-crimson-pro);
+  --font-decorative: var(--font-pinyon-script);
 
-  --text-xs: var(--text-xs);
-  --text-sm: var(--text-sm);
-  --text-base: var(--text-base);
-  --text-lg: var(--text-lg);
-  --text-xl: var(--text-xl);
-  --text-2xl: var(--text-2xl);
-  --text-3xl: var(--text-3xl);
-  --text-4xl: var(--text-4xl);
-  --text-5xl: var(--text-5xl);
-  --text-6xl: var(--text-6xl);
+  --text-xs: clamp(0.69rem, 0.66rem + 0.17vw, 0.79rem);
+  --text-sm: clamp(0.83rem, 0.79rem + 0.21vw, 0.96rem);
+  --text-base: clamp(1.00rem, 0.95rem + 0.26vw, 1.20rem);
+  --text-lg: clamp(1.20rem, 1.14rem + 0.31vw, 1.44rem);
+  --text-xl: clamp(1.44rem, 1.37rem + 0.37vw, 1.73rem);
+  --text-2xl: clamp(1.73rem, 1.64rem + 0.45vw, 2.07rem);
+  --text-3xl: clamp(2.07rem, 1.97rem + 0.54vw, 2.49rem);
+  --text-4xl: clamp(2.49rem, 2.37rem + 0.65vw, 3.20rem);
+  --text-5xl: clamp(3.00rem, 2.80rem + 0.80vw, 4.50rem);
+  --text-6xl: clamp(3.50rem, 3.20rem + 1.00vw, 5.50rem);
 
   --animate-float: float 3s ease-in-out infinite;
   --animate-fade-up: fadeUp var(--duration-slow) var(--easing-smooth) forwards;
@@ -125,11 +155,22 @@
   }
 }
 
+@layer utilities {
+  .font-500 { font-weight: 500; }
+  .font-600 { font-weight: 600; }
+
+  .duration-medium { transition-duration: var(--duration-medium); }
+  .ease-smooth { transition-timing-function: var(--easing-smooth); }
+
+  .opacity-4 { opacity: 0.04; }
+  .contain-paint { contain: paint; }
+}
+
 @layer components {
   .folio-frame {
     position: relative;
     border: 1px solid rgba(var(--color-kopi-brown-rgb), 0.1);
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     overflow: hidden;
     transition: all var(--duration-medium) var(--easing-smooth);
   }
@@ -139,7 +180,7 @@
     position: absolute;
     inset: 8px;
     border: 1px solid rgba(var(--color-gold-leaf-rgb), 0.2);
-    border-radius: 6px;
+    border-radius: calc(var(--border-radius) - 2px);
     pointer-events: none;
   }
   
@@ -151,6 +192,72 @@
   
   .folio-frame:hover::after {
     border-color: var(--color-gold-leaf);
+  }
+
+  .drop-cap {
+    position: relative;
+    max-width: 65ch;
+  }
+
+  .drop-cap::first-letter {
+    float: left;
+    font-family: var(--font-decorative);
+    font-size: 5rem;
+    line-height: 0.9;
+    color: var(--color-terracotta);
+    margin-right: var(--space-3);
+    margin-top: 0.25em;
+    padding-right: var(--space-2);
+    border-right: 2px solid var(--color-ui-gold);
+  }
+
+  .tile-pattern {
+    width: 100%;
+    height: 4px;
+    background-image:
+      linear-gradient(45deg, var(--color-ui-blue) 25%, transparent 25%),
+      linear-gradient(-45deg, var(--color-ui-blue) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, var(--color-ui-blue) 75%),
+      linear-gradient(-45deg, transparent 75%, var(--color-ui-blue) 75%);
+    background-size: 16px 16px;
+    margin: var(--space-8) 0;
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: var(--space-16);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    animation: pulse var(--duration-slow) infinite;
+  }
+
+  .scroll-text {
+    font-size: var(--text-sm);
+    color: var(--color-kopi-brown);
+    letter-spacing: var(--tracking-loose);
+  }
+
+  .scroll-arrow {
+    width: 24px;
+    height: 24px;
+    border-right: 2px solid var(--color-ui-terracotta);
+    border-bottom: 2px solid var(--color-ui-terracotta);
+    transform: rotate(45deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .tile-pattern {
+    height: 2px;
+    background-size: 8px 8px;
+  }
+
+  .scroll-indicator {
+    display: none;
   }
 }
 
@@ -165,5 +272,25 @@
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float {
+    animation: none !important;
+  }
+
+  .animate-fade-up {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .scroll-indicator {
+    animation: none !important;
   }
 }

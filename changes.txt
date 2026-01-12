@@ -1,0 +1,30 @@
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   frontend/package-lock.json
+        modified:   frontend/package.json
+        modified:   frontend/playwright.config.ts
+        modified:   frontend/src/app/api/newsletter/route.ts
+        modified:   frontend/src/app/events/page.tsx
+        modified:   frontend/src/app/globals.css
+        modified:   frontend/src/app/page.tsx
+        modified:   frontend/src/components/merlion/button-merlion.tsx
+        modified:   frontend/src/components/merlion/cart-drawer.tsx
+        modified:   frontend/src/components/merlion/mobile-nav.tsx
+        modified:   frontend/src/components/merlion/newsletter-form.tsx
+        modified:   frontend/src/components/merlion/texture-overlay.tsx
+        modified:   frontend/src/design-tokens/index.ts
+        modified:   frontend/tests/visual/hero.png
+        deleted:    landing_page.html
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .windsurfrules
+        5704fcf9cc956f20.css
+        frontend/src/components/merlion/drop-cap.tsx
+        frontend/src/components/merlion/peranakan-divider.tsx
+        frontend/src/components/merlion/scroll-indicator.tsx

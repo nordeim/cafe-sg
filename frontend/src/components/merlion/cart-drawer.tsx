@@ -18,7 +18,10 @@ export function CartDrawer() {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <button className="relative p-2 text-kopi-brown hover:text-ui-terracotta transition-colors">
+        <button
+          className="relative p-2 text-kopi-brown hover:text-ui-terracotta transition-colors"
+          aria-label="Open cart"
+        >
           <ShoppingBag className="w-6 h-6" />
           {items.length > 0 && (
             <span className="absolute top-0 right-0 w-4 h-4 bg-ui-terracotta text-nyonya-cream text-xs rounded-full flex items-center justify-center font-bold">
@@ -46,7 +49,8 @@ export function CartDrawer() {
                 </div>
                 <div className="flex-1">
                   <h4 className="font-600 text-kopi-brown">{item.name}</h4>
-                  <div className="text-ui-gold font-decorative text-lg">
+                  <div className="text-ui-gold font-decorative text-lg" role="text">
+                    <span className="sr-only">Price: </span>
                     {/* Inline formatting if utils not ready */}
                     {`$${(item.price / 100).toFixed(2)}`}
                   </div>
@@ -81,7 +85,8 @@ export function CartDrawer() {
           <div className="flex justify-between items-end">
             <span className="font-600 text-kopi-brown">Total</span>
             <div className="text-right">
-              <span className="block font-decorative text-3xl text-ui-terracotta">
+              <span className="block font-decorative text-3xl text-ui-terracotta" role="text">
+                <span className="sr-only">Total price: </span>
                 {`$${(totalCents / 100).toFixed(2)}`}
               </span>
               <span className="text-xs text-kopi-brown/60">Incl. 9% GST</span>

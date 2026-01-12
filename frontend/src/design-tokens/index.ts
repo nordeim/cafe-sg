@@ -32,6 +32,16 @@ export const tokens = {
       body: 'var(--font-body)',
       decorative: 'var(--font-decorative)',
     },
+    lineHeights: {
+      tight: 'var(--leading-tight)',
+      normal: 'var(--leading-normal)',
+      loose: 'var(--leading-loose)',
+    },
+    letterSpacing: {
+      tight: 'var(--tracking-tight)',
+      normal: 'var(--tracking-normal)',
+      loose: 'var(--tracking-loose)',
+    },
     scale: {
       xs: 'var(--text-xs)',
       sm: 'var(--text-sm)',
@@ -56,6 +66,21 @@ export const tokens = {
     16: '4rem',
     24: '6rem',
     32: '8rem',
+    semantic: {
+      inside: 'var(--space-inside)',
+      outside: 'var(--space-outside)',
+      stack: 'var(--space-stack)',
+      inline: 'var(--space-inline)',
+    },
+  },
+  layout: {
+    containerWidth: 'var(--container-width)',
+    navHeight: 'var(--nav-height)',
+    borderRadius: {
+      sm: 'var(--border-radius-sm)',
+      default: 'var(--border-radius)',
+      lg: 'var(--border-radius-lg)',
+    },
   },
   animations: {
     duration: {
@@ -65,6 +90,22 @@ export const tokens = {
     },
     easing: {
       smooth: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+      bounce: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
     },
+  },
+  shadows: {
+    sm: 'var(--shadow-sm)',
+    md: 'var(--shadow-md)',
+    lg: 'var(--shadow-lg)',
+    xl: 'var(--shadow-xl)',
+  },
+  zIndex: {
+    below: -1,
+    base: 0,
+    dropdown: 100,
+    sticky: 200,
+    modal: 300,
+    popover: 400,
+    toast: 500,
   },
 } as const;
